@@ -7,6 +7,7 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -21,7 +22,8 @@ import static io.restassured.RestAssured.given;
 @Owner("andryushchenkoka")
 public class UserTests extends BaseTest {
 
-    @ParameterizedTest(name = "Получить данные пользователя с userId = {0}")
+    @ParameterizedTest(name = "с userId = {0}")
+    @DisplayName("Получить данные существующего пользователя")
     @Story("Получить данные пользователя")
     @ValueSource(ints = {
             1, 5, 12
@@ -42,8 +44,9 @@ public class UserTests extends BaseTest {
         });
     }
 
-    @ParameterizedTest(name = "Поиск пользователя с невалидным userId = {0}")
-    @Story("Получить данные пользователя с несуществующим id")
+    @ParameterizedTest(name = "с невалидным userId = {0}")
+    @DisplayName("Получить данные несуществующего пользователя")
+    @Story("Получить данные пользователя")
     @ValueSource(ints = {
             0, 13
     })
@@ -58,7 +61,8 @@ public class UserTests extends BaseTest {
         Assertions.assertEquals("{}", response.path("").toString());
     }
 
-    @ParameterizedTest(name = "Удалить пользователя с userId = {0}")
+    @ParameterizedTest(name = "с userId = {0}")
+    @DisplayName("Удаление пользователя")
     @Story("Удаление пользователя")
     @ValueSource(ints = {
             0, 5
