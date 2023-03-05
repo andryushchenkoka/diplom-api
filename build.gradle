@@ -4,7 +4,7 @@ plugins {
     id "io.freefair.lombok" version "6.5.0.3"
 }
 
-group 'io.petstore'
+group 'in.reqres'
 
 repositories {
     mavenCentral()
