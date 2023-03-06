@@ -1,6 +1,8 @@
 package in.reqres.tests;
 
+import in.reqres.models.request.LoginNoPassRequest;
 import in.reqres.models.request.LoginRequest;
+import in.reqres.models.request.RegisterNoPassRequest;
 import in.reqres.models.request.RegisterRequest;
 import in.reqres.models.response.LoginFailedResponse;
 import in.reqres.models.response.LoginSuccessResponse;
@@ -50,7 +52,7 @@ public class AuthTests extends BaseTest {
 
         step("Запрос на авторизацию", () -> {
             useSpecs(requestSpec(endpointConfig.getBaseURL()), responseSpec400());
-            LoginRequest userLogin = new LoginRequest("peter@klaven", "");
+            LoginNoPassRequest userLogin = new LoginNoPassRequest("peter@klaven");
             LoginFailedResponse failedResponse = given()
                     .when()
                     .body(userLogin)
@@ -87,7 +89,7 @@ public class AuthTests extends BaseTest {
 
         step("Запрос на регистрацию", () -> {
             useSpecs(requestSpec(endpointConfig.getBaseURL()), responseSpec400());
-            RegisterRequest userRegister = new RegisterRequest("sydney@fife", "");
+            RegisterNoPassRequest userRegister = new RegisterNoPassRequest("sydney@fife");
             RegisterFailedResponse failedResponse = given()
                     .when()
                     .body(userRegister)
