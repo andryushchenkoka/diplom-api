@@ -1,0 +1,16 @@
+{
+  "base": {
+    "project": "diplom-ui",
+    "environment": "test",
+    "comment": "local send",
+    "reportLink": "",
+    "language": "en",
+    "allureFolder": "allure-report/",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "5843491541:AAEXjHBGuOUrtNRGs_u8FAiqqS9BfEy5gVU",
+    "chat": "-1001848142110",
+    "replyTo": ""
+  }
+}
