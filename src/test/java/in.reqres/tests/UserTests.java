@@ -26,7 +26,7 @@ public class UserTests extends BaseTest {
     @DisplayName("Получить данные существующего пользователя")
     @Story("Получить данные пользователя")
     @ValueSource(ints = {
-            1, 5, 12
+            0, 1, 5, 12
     })
     public void getUserByIdTest(int userId) {
 

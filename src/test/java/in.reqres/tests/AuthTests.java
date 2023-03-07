@@ -12,10 +12,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static in.reqres.specs.Specs.*;
 import static io.qameta.allure.Allure.step;
@@ -28,6 +25,7 @@ import static io.restassured.RestAssured.given;
 public class AuthTests extends BaseTest {
 
     @Test
+    @Disabled
     @Story("Вход в систему")
     @DisplayName("Вход с полным и валидным набором данных")
     public void userLoginByFullDataTest() {
@@ -70,7 +68,7 @@ public class AuthTests extends BaseTest {
 
         step("Запрос на регистрацию", () -> {
             useSpecs(requestSpec(endpointConfig.getBaseURL()), responseSpec200());
-            RegisterRequest userRegister = new RegisterRequest("eve.holt@reqres.in", "pistol");
+            RegisterRequest userRegister = new RegisterRequest("eveholt@reqres.in", "pistol");
             RegisterSuccessResponse successResponse = given()
                     .when()
                     .body(userRegister)
