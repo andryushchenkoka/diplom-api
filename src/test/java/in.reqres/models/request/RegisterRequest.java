@@ -13,4 +13,9 @@ public class RegisterRequest {
 
     private String email;
     private String password;
+
+    public RegisterRequest(String email) {
+
+        this.email = email;
+    }
 }
