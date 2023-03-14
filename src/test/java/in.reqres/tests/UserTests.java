@@ -26,7 +26,7 @@ public class UserTests extends BaseTest {
     @DisplayName("Получить данные существующего пользователя")
     @Story("Получить данные пользователя")
     @ValueSource(ints = {
-            0, 1, 5, 12
+            1, 5, 12
     })
     public void getUserByIdTest(int userId) {
 
@@ -38,8 +38,8 @@ public class UserTests extends BaseTest {
                     .get(endpointConfig.getSingleUserEndpoint())
                     .then().log().all()
                     .extract().jsonPath().getObject("data", UserDataResponse.class);
-            Assertions.assertNotNull(userData.getFirst_name());
-            Assertions.assertNotNull(userData.getLast_name());
+            Assertions.assertNotNull(userData.getFirstName());
+            Assertions.assertNotNull(userData.getLastName());
             Assertions.assertTrue(userData.getEmail().endsWith("@reqres.in"));
         });
     }

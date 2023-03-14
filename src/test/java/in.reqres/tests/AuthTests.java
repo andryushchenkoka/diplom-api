@@ -23,7 +23,6 @@ import static io.restassured.RestAssured.given;
 public class AuthTests extends BaseTest {
 
     @Test
-    @Disabled
     @Story("Вход в систему")
     @DisplayName("Вход с полным и валидным набором данных")
     public void userLoginByFullDataTest() {
@@ -66,7 +65,7 @@ public class AuthTests extends BaseTest {
 
         step("Запрос на регистрацию", () -> {
             useSpecs(requestSpec(endpointConfig.getBaseURL()), responseSpec200());
-            RegisterRequest userRegister = new RegisterRequest("eveholt@reqres.in", "pistol");
+            RegisterRequest userRegister = new RegisterRequest("eve.holt@reqres.in", "pistol");
             RegisterSuccessResponse successResponse = given()
                     .when()
                     .body(userRegister)
