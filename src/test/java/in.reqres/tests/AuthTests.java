@@ -28,13 +28,15 @@ public class AuthTests extends BaseTest {
     public void userLoginByFullDataTest() {
 
         step("Запрос на авторизацию", () -> {
-            useSpecs(requestSpec(endpointConfig.getBaseURL()), responseSpec200());
             LoginRequest userLogin = new LoginRequest("eve.holt@reqres.in", "cityslicka");
             LoginSuccessResponse successResponse = given()
+                    .spec(request)
                     .when()
                     .body(userLogin)
                     .post(endpointConfig.getLoginEndpoint())
-                    .then().log().all()
+                    .then()
+                    .spec(responseSpec200())
+                    .log().all()
                     .extract().as(LoginSuccessResponse.class);
             Assertions.assertNotNull(successResponse.getToken());
         });
@@ -46,13 +48,15 @@ public class AuthTests extends BaseTest {
     public void userLoginWithoutPasswordTest() {
 
         step("Запрос на авторизацию", () -> {
-            useSpecs(requestSpec(endpointConfig.getBaseURL()), responseSpec400());
             LoginRequest userLogin = new LoginRequest("peter@klaven");
             LoginFailedResponse failedResponse = given()
+                    .spec(request)
                     .when()
                     .body(userLogin)
                     .post(endpointConfig.getLoginEndpoint())
-                    .then().log().all()
+                    .then()
+                    .spec(responseSpec400())
+                    .log().all()
                     .extract().as(LoginFailedResponse.class);
             Assertions.assertEquals("Missing password", failedResponse.getError());
         });
@@ -64,13 +68,15 @@ public class AuthTests extends BaseTest {
     public void userRegisterByFullDataTest() {
 
         step("Запрос на регистрацию", () -> {
-            useSpecs(requestSpec(endpointConfig.getBaseURL()), responseSpec200());
             RegisterRequest userRegister = new RegisterRequest("eve.holt@reqres.in", "pistol");
             RegisterSuccessResponse successResponse = given()
+                    .spec(request)
                     .when()
                     .body(userRegister)
                     .post(endpointConfig.getRegisterEndpoint())
-                    .then().log().all()
+                    .then()
+                    .spec(responseSpec200())
+                    .log().all()
                     .extract().as(RegisterSuccessResponse.class);
             Assertions.assertTrue(successResponse.getId() > 0);
             Assertions.assertNotNull(successResponse.getToken());
@@ -83,13 +89,15 @@ public class AuthTests extends BaseTest {
     public void userRegisterWithoutPasswordTest() {
 
         step("Запрос на регистрацию", () -> {
-            useSpecs(requestSpec(endpointConfig.getBaseURL()), responseSpec400());
             RegisterRequest userRegister = new RegisterRequest("sydney@fife");
             RegisterFailedResponse failedResponse = given()
+                    .spec(request)
                     .when()
                     .body(userRegister)
                     .post(endpointConfig.getRegisterEndpoint())
-                    .then().log().all()
+                    .then()
+                    .spec(responseSpec400())
+                    .log().all()
                     .extract().as(RegisterFailedResponse.class);
             Assertions.assertEquals("Missing password", failedResponse.getError());
         });

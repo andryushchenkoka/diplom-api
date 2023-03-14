@@ -31,12 +31,14 @@ public class UserTests extends BaseTest {
     public void getUserByIdTest(int userId) {
 
         step("Запрос пользовательских данных", () -> {
-            useSpecs(requestSpec(endpointConfig.getBaseURL()), responseSpec200());
             UserDataResponse userData = given()
+                    .spec(request)
                     .param("id", userId)
                     .when()
                     .get(endpointConfig.getSingleUserEndpoint())
-                    .then().log().all()
+                    .then()
+                    .spec(responseSpec200())
+                    .log().all()
                     .extract().jsonPath().getObject("data", UserDataResponse.class);
             Assertions.assertNotNull(userData.getFirstName());
             Assertions.assertNotNull(userData.getLastName());
@@ -51,12 +53,14 @@ public class UserTests extends BaseTest {
             0, 13
     })
     public void userNotFoundByIdTest(int userId) {
-        useSpecs(requestSpec(endpointConfig.getBaseURL()), responseSpec404());
         Response response = given()
+                .spec(request)
                 .param("id", userId)
                 .when()
                 .get(endpointConfig.getSingleUserEndpoint())
-                .then().log().all()
+                .then()
+                .spec(responseSpec404())
+                .log().all()
                 .extract().response();
         Assertions.assertEquals("{}", response.path("").toString());
     }
@@ -69,12 +73,14 @@ public class UserTests extends BaseTest {
     })
     public void deleteUserTest(int userId) {
         step("Удалить пользователя", () -> {
-            useSpecs(requestSpec(endpointConfig.getBaseURL()), responseSpec204());
             given()
+                    .spec(request)
                     .when()
                     .param("id", userId)
                     .delete(endpointConfig.getSingleUserEndpoint())
-                    .then().log().all();
+                    .then()
+                    .spec(responseSpec204())
+                    .log().all();
         });
     }
 }
