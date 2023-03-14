@@ -9,13 +9,4 @@ public interface EndpointConfig extends Config {
 
     @Key("base-url")
     String getBaseURL();
-
-    @Key("login")
-    String getLoginEndpoint();
-
-    @Key("register")
-    String getRegisterEndpoint();
-
-    @Key("singleUser")
-    String getSingleUserEndpoint();
 }

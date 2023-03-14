@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static in.reqres.helpers.Endpoint.*;
 import static in.reqres.specs.Specs.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
@@ -35,7 +36,7 @@ public class UserTests extends BaseTest {
                     .spec(request)
                     .param("id", userId)
                     .when()
-                    .get(endpointConfig.getSingleUserEndpoint())
+                    .get(SINGLE_USER_ENDPOINT)
                     .then()
                     .spec(responseSpec200())
                     .log().all()
@@ -57,7 +58,7 @@ public class UserTests extends BaseTest {
                 .spec(request)
                 .param("id", userId)
                 .when()
-                .get(endpointConfig.getSingleUserEndpoint())
+                .get(SINGLE_USER_ENDPOINT)
                 .then()
                 .spec(responseSpec404())
                 .log().all()
@@ -77,7 +78,7 @@ public class UserTests extends BaseTest {
                     .spec(request)
                     .when()
                     .param("id", userId)
-                    .delete(endpointConfig.getSingleUserEndpoint())
+                    .delete(SINGLE_USER_ENDPOINT)
                     .then()
                     .spec(responseSpec204())
                     .log().all();

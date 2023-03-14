@@ -12,6 +12,7 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
 
+import static in.reqres.helpers.Endpoint.*;
 import static in.reqres.specs.Specs.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
@@ -33,7 +34,7 @@ public class AuthTests extends BaseTest {
                     .spec(request)
                     .when()
                     .body(userLogin)
-                    .post(endpointConfig.getLoginEndpoint())
+                    .post(LOGIN_ENDPOINT)
                     .then()
                     .spec(responseSpec200())
                     .log().all()
@@ -53,7 +54,7 @@ public class AuthTests extends BaseTest {
                     .spec(request)
                     .when()
                     .body(userLogin)
-                    .post(endpointConfig.getLoginEndpoint())
+                    .post(LOGIN_ENDPOINT)
                     .then()
                     .spec(responseSpec400())
                     .log().all()
@@ -73,7 +74,7 @@ public class AuthTests extends BaseTest {
                     .spec(request)
                     .when()
                     .body(userRegister)
-                    .post(endpointConfig.getRegisterEndpoint())
+                    .post(REGISTER_ENDPOINT)
                     .then()
                     .spec(responseSpec200())
                     .log().all()
@@ -94,7 +95,7 @@ public class AuthTests extends BaseTest {
                     .spec(request)
                     .when()
                     .body(userRegister)
-                    .post(endpointConfig.getRegisterEndpoint())
+                    .post(REGISTER_ENDPOINT)
                     .then()
                     .spec(responseSpec400())
                     .log().all()
